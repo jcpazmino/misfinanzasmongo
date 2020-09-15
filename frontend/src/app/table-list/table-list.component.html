@@ -1,0 +1,263 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">       
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-success">
+                      <h4 class="card-title ">{{operacion}} movimiento</h4> 
+                      <p class="card-category"> {{fechaActual}}</p>
+                  </div>
+                  <div class="card-body">
+                      <form #frmMovimientos="ngForm">
+                          <div class="row">
+                              <div class="col-md-2"> 
+                                   <mat-form-field>
+                                      <mat-label>Grupos</mat-label>
+                                      <select matNativeControl [(ngModel)]="selectedSubgrupo" name="subgrupos" (change)="selecConceptos()">
+                                        <option *ngFor="let subgrupo of subgrupos" [value]="subgrupo.descripcion">
+                                          {{subgrupo.descripcion}}
+                                        </option>
+                                      </select>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                  <mat-form-field>
+                                      <mat-label>Conceptos</mat-label>
+                                      <select matNativeControl [(ngModel)]="selectedConcepto" name="conceptos">
+                                        <option *ngFor="let concepto of arrConceptos" [value]="concepto">
+                                          {{concepto}}
+                                        </option>
+                                      </select>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-md-2">
+                                <mat-form-field class="example-full-width"> 
+                                    <mat-label>Fecha</mat-label>
+                                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" 
+                                            [(ngModel)]="selectedFecha" [ngModelOptions]="{standalone: true}">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> 
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>                              
+                              <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Descripción" [(ngModel)]="selectedDescripcion" name="descripcion" >
+                                  </mat-form-field>
+                              </div>                              
+                              <div class="col-md-2">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput type="number" placeholder="Valor" [(ngModel)]="selectedValue" 
+                                              name="valor" #valor = "ngModel" required>
+                                    <small *ngIf="!valor.valid && valor.touched">
+                                      El valor es obligatorio 
+                                    </small> 
+                                  </mat-form-field>
+                              </div>     
+                              <div class="col-md-1">
+                                  <button mat-raised-button color="primary" (click)="llamaMetodo()" 
+                                          type="button" [disabled]= "frmMovimientos.invalid">Guardar</button>
+                              </div>                                                                         
+                          </div>
+                      </form>                    
+                  </div>               
+              </div>
+          </div>   
+      </div>   
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Listado de movimientos</h4>
+                        <p class="card-category"> Mes actual: {{mesActual}}</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>  </th>
+                                    <th> Grupo </th>
+                                    <th> Subgrupo </th>
+                                    <th> Concepto </th>
+                                    <th> Descripción </th>
+                                    <th> Fecha </th>
+                                    <th class="alignValor"> Valor </th>   
+                                    <th> Operaciones </th>                               
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let movimiento of movimientos, index as id">
+                                        <td> {{ id+1 }} </td>
+                                        <td> {{movimiento.obj_concepto.grupo}} </td>
+                                        <td> {{movimiento.obj_concepto.subgrupo}} </td>
+                                        <td>  {{movimiento.obj_concepto.concepto}} </td>
+                                        <td>  {{movimiento.detalle}} </td>
+                                        <td>  {{movimiento.fecha}} </td>
+                                        <td class="text-primary alignValor"> {{movimiento.valor | currency }} </td>
+                                        <td> <button mat-raised-button color="primary" (click)="editMovimiento(movimiento._id)" type="button" class="btnListado">Editar</button> 
+                                          <button mat-raised-button color="primary" (click)="delMovimiento(movimiento._id)" type="button" class="btnListado">Borrar</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th class=" alignValor"> Total Ingresos </th>   
+                                        <th class=" alignValor"> {{ totalIngresosMes | currency}} </th>
+                                        <th>  </th>                               
+                                    </tr>  
+                                    <tr>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th class=" alignValor"> Total Egresos </th>   
+                                        <th class=" alignValor"> {{ totalEgresosMes | currency}} </th> 
+                                        <th>  </th>                              
+                                    </tr>                                      
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  <!--           <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title mt-0"> Table on Plain Background</h4>
+                        <p class="card-category"> Here is a subtitle for this table</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Country
+                                    </th>
+                                    <th>
+                                        City
+                                    </th>
+                                    <th>
+                                        Salary
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            Dakota Rice
+                                        </td>
+                                        <td>
+                                            Niger
+                                        </td>
+                                        <td>
+                                            Oud-Turnhout
+                                        </td>
+                                        <td>
+                                            $36,738
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2
+                                        </td>
+                                        <td>
+                                            Minerva Hooper
+                                        </td>
+                                        <td>
+                                            Curaçao
+                                        </td>
+                                        <td>
+                                            Sinaai-Waas
+                                        </td>
+                                        <td>
+                                            $23,789
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            3
+                                        </td>
+                                        <td>
+                                            Sage Rodriguez
+                                        </td>
+                                        <td>
+                                            Netherlands
+                                        </td>
+                                        <td>
+                                            Baileux
+                                        </td>
+                                        <td>
+                                            $56,142
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            4
+                                        </td>
+                                        <td>
+                                            Philip Chaney
+                                        </td>
+                                        <td>
+                                            Korea, South
+                                        </td>
+                                        <td>
+                                            Overland Park
+                                        </td>
+                                        <td>
+                                            $38,735
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            5
+                                        </td>
+                                        <td>
+                                            Doris Greene
+                                        </td>
+                                        <td>
+                                            Malawi
+                                        </td>
+                                        <td>
+                                            Feldkirchen in Kärnten
+                                        </td>
+                                        <td>
+                                            $63,542
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            6
+                                        </td>
+                                        <td>
+                                            Mason Porter
+                                        </td>
+                                        <td>
+                                            Chile
+                                        </td>
+                                        <td>
+                                            Gloucester
+                                        </td>
+                                        <td>
+                                            $78,615
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+  </div>
+  
