@@ -7,14 +7,15 @@ var UsuarioController = require('../controllers/usuario');//comunicación con el
 var router = express.Router();//middleware de nivel de direccionador
 
 // pila de middleware de direccionador 
-router.post('/save',                UsuarioController.saveusuario);
-router.post('/upload-image/:id?',   md_upload, UsuarioController.upload);
-router.get('/usuarios/:last?',      UsuarioController.getusuarios); //last? --> el ? indica que el parámetro es opcional
+router.post('/registro',              UsuarioController.registro);
+router.put('/usuario/:id',            UsuarioController.updateusuario);
+/*router.post('/upload-image/:id?',   md_upload, UsuarioController.upload);
+router.get('/usuarios/:last?',      UsuarioController.getusuarios); //last(cuántos registros cargar) --> el ? indica que el parámetro es opcional
 router.get('/usuario/:id',          UsuarioController.getusuario); // :id--> indica que el parámetro es obligatorio
 router.put('/usuario/:id',          UsuarioController.updateusuario);
-router.get('/get-image/:image',     UsuarioController.getImage);
+router.get('/get-image/:image',     UsuarioController.getImage);//carga la imagen del usuario
 router.delete('/usuario/:id',       UsuarioController.deleteusuario);
 router.get('/search/:search',       UsuarioController.searchusuario); 
-router.get('/searchCorreo/:correo', UsuarioController.searchcorreo); 
+router.get('/searchCorreo/:correo', UsuarioController.searchcorreo); */
 
 module.exports = router;

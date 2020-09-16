@@ -12,6 +12,7 @@ var fijo_routes     = require('./routes/fijo');
 var grupo_routes    = require('./routes/grupo');
 var movimiento_routes = require('./routes/movimiento');
 var subgrupo_routes = require('./routes/subgrupo');
+var usuario_routes = require('./routes/usuario');
 
 //middlewares
 app.use(bodyParser.urlencoded({extended:false}));
@@ -27,10 +28,11 @@ app.use((req, res, next) => {
 });
 
 //añadir prefijos a rutas / cargar rutas
-app.use('/api/fijo',       fijo_routes);
+app.use('/api/fijo',        fijo_routes);
 app.use('/api/grupo',       grupo_routes);
-app.use('/api/movimiento', movimiento_routes);
+app.use('/api/movimiento',  movimiento_routes);
 app.use('/api/subgrupo',    subgrupo_routes);
+app.use('/api/usuario',     usuario_routes);
 
 //exportar módulo (fichero actual)
 module.exports = app;

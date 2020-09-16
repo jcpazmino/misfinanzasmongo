@@ -1,5 +1,4 @@
 'use strict'
-//archivo de modelo
 
 var mongoose=require('mongoose');
 var Schema = mongoose.Schema;
