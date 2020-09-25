@@ -25,7 +25,7 @@ var controller = {
             usuario.apellidos = params.apellidos;           
             usuario.telefono = '';
             usuario.acercaMi = 'Descripción de tu trabajo';
-            usuario.urlFoto = '';
+            usuario.urlFoto = './assets/img/faces/juan.jpg';
             usuario.correo = params.correo;
             usuario.clave = bcrypt.hashSync(params.clave, saltRounds);
             usuario.rolid = "web";
@@ -87,7 +87,7 @@ var controller = {
                 message: 'Los datos no son válidos'
             });
         }
-    }
+    }    
 
 }//fin del controlador
 
