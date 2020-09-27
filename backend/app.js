@@ -32,7 +32,7 @@ app.use('/api/fijo',        fijo_routes);
 app.use('/api/grupo',       grupo_routes);
 app.use('/api/movimiento',  movimiento_routes);
 app.use('/api/subgrupo',    subgrupo_routes);
-app.use('/api/usuario',     usuario_routes);
+app.use('/api/usuario',     usuario_routes);  
 
 //exportar módulo (fichero actual)
 module.exports = app;

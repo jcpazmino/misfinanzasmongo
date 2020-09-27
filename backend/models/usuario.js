@@ -17,5 +17,3 @@ var UsuarioSchema = Schema({
 });
 
 module.exports = mongoose.model('Usuario', UsuarioSchema); 
-
- 
