@@ -58,7 +58,7 @@ var controller = {
     getUsuarioCorreo: (req, res) => {
         var correo = req.params.correo;
 
-        if (!correo || correo == null) {
+        if (!correo || correo == null) { 
             return res.status(428).send({
                 status: 'error',
                 message: mensage.gl_mensages(428)
