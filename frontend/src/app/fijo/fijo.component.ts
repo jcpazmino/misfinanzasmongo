@@ -22,7 +22,7 @@ import { Global } from  '../services/global';
 export class FijoComponent implements OnInit {
 /*** recoge la información digitada en el formulario */
   @Input() selectedSubgrupo: string;
-  @Input() selectedConcepto: string;
+  @Input() selectedConcepto: string; 
   @Input() selectedDescripcion: string;
   @Input() selectedValue: number; 
 

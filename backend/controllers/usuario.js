@@ -74,7 +74,7 @@ var controller = {
                 } else {
                     if (usuario) {
                         return res.status(200).send({
-                            status: 'succes',
+                            status: 'success',
                             message: mensage.gl_mensages(200),
                             usuario: usuario
                         });
@@ -108,7 +108,7 @@ var controller = {
                 } else {
                     if (usuario) {
                         return res.status(200).send({
-                            status: 'succes',
+                            status: 'success',
                             message: mensage.gl_mensages(200),
                             usuario: usuario
                         });
@@ -148,7 +148,7 @@ var controller = {
                     });
                 } else {
                     return res.status(202).send({
-                        status: 'succes',
+                        status: 'success',
                         message: mensage.gl_mensages(202)
                     });
                 }
@@ -186,9 +186,9 @@ var controller = {
                     });
                 } else {
                     if (usuarioUpdated) {
-                        return res.status(200).send({
-                            status: 'succes',
-                            message: mensage.gl_mensages(200),
+                        return res.status(202).send({
+                            status: 'success',
+                            message: mensage.gl_mensages(202),
                             usuario: usuarioUpdated
                         });
                     }
@@ -252,7 +252,7 @@ var controller = {
                     }else{
                         if (usuarioUpdated) {
                             return res.status(200).send({
-                                status: 'succes',
+                                status: 'success',
                                 message: mensage.gl_mensages(200),
                                 usuario: usuarioUpdated
                             });
@@ -306,7 +306,7 @@ var controller = {
             } else {
                 if (usuarios) {
                     return res.status(200).send({
-                        status: 'succes',
+                        status: 'success',
                         message: mensage.gl_mensages(200),
                         usuarios: usuarios
                     });
@@ -349,7 +349,7 @@ var controller = {
                 }else{
                     if (usuarioUpdated) {
                         return res.status(200).send({
-                            status: 'succes',
+                            status: 'success',
                             message: mensage.gl_mensages(200),
                             usuario: usuarioUpdated
                         });

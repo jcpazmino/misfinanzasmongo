@@ -16,7 +16,7 @@ router.get('/usuarioCorreo/:correo?', UsuarioController.getUsuarioCorreo);
 router.get('/usuarioId/:id?', UsuarioController.getUsuarioId);
 router.put('/actualizar/:id?', UsuarioController.actualizar); 
 router.put('/actualizarClave/:id?', UsuarioController.actualizarclave);
-//cargar imagenes al servidor
+//cargar imagenes al servidor 
 router.post('/upload-image/:id?', dir_upload, UsuarioController.upload);
 router.get('/get-image/:image?', UsuarioController.getImage);
 //adicionales para el administrador de la BD

@@ -8,16 +8,16 @@
             <p class="card-category">Complete su perfil</p>
           </div>
           <div class="card-body">
-            <form>
+            <form #frmUsuario="ngForm">
               <div class="row">
                 <div class="col-md-4">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Usuario Web" disabled>
+                    <input matInput placeholder="Rol" [value]="usuario.rolid" disabled>
                   </mat-form-field>
                 </div>
                 <div class="col-md-8">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Correo" type="email" disabled>
+                    <input matInput [value]="usuario.correo" placeholder="Correo" type="email" disabled>
                   </mat-form-field>
                 </div>
               </div>
@@ -25,86 +25,99 @@
                 <div class="col-md-12">
                   <h4>Datos Básico</h4>
                 </div>
-              </div>                         
+              </div>
               <div class="row">
                 <div class="col-md-6">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Apellidos" type="text">
+                    <input matInput [(ngModel)]="frm_apellidos" name="apellidos" placeholder="Apellidos" type="text"
+                      required>
                   </mat-form-field>
                 </div>
                 <div class="col-md-6">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Nombres" type="text">
+                    <input matInput [(ngModel)]="frm_nombres" name="nombres" placeholder="Nombres" type="text" required>
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4">
                   <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Teléfono" type="text">
+                    <input matInput [(ngModel)]="frm_telefono" name="telefono" placeholder="Teléfono" type="text">
                   </mat-form-field>
                 </div>
-                <div class="col-md-4">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="" type="text" disabled>
-                  </mat-form-field>
+                <div class="col-md-8">
                 </div>
-                <div class="col-md-4">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="" type="text" disabled>
-                  </mat-form-field>
-                </div>
+
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <mat-form-field class="example-full-width">
-                    <textarea matInput placeholder="Acerca de mi"></textarea>
+                    <textarea matInput [(ngModel)]="frm_acercaMi" name="acercaMi"
+                      placeholder="Acerca de mi">{{usuario.acercaMi}}</textarea>
                   </mat-form-field>
                 </div>
               </div>
-              <button mat-raised-button type="submit" class="btn btn-danger pull-right">Actualizar</button>
+              <button mat-raised-button type="button" class="btn btn-danger pull-right"
+                (click)="actDatosBasicos()">Actualizar </button>
               <div class="clearfix"></div>
+            </form>
+            <form #frmUsuarioClave="ngForm">
               <div class="row">
                 <div class="col-md-12">
                   <h4>Actualizar Clave</h4>
                 </div>
               </div>
+              <div class="row mb-0 pb-0">
+                <div class="col-md-6 ">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="frm_clave" name="clave" placeholder="Clave" type="password">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="frm_conClave" name="confClave" placeholder="Confirmar Clave"
+                      type="password">
+                  </mat-form-field>
+                </div>
+              </div>
               <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Clave" type="text">
-                  </mat-form-field>
+                <div class="col-md-12 text-warning mt-0 pt-0">
+                  <small>{{parametrosClave}}</small>
                 </div>
-                <div class="col-md-6">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Confirmar Clave" type="text">
-                  </mat-form-field>
-                </div>
-              </div> 
-              <button mat-raised-button type="submit" class="btn btn-danger pull-right">Cambiar Clave</button>
-              <div class="clearfix"></div>              
+              </div>
+              <button mat-raised-button type="button" class="btn btn-danger pull-right" (click)="actClave()">Cambiar
+                Clave</button>
+              <div class="clearfix"></div>
             </form>
+            <form #frmUrlFoto="ngForm" method='post' encType="multipart/form-data" (ngSubmit) = "onSubmit()">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>Cambiar Foto</h4>
+                </div>
+              </div>
+              <div class="row mb-0 pb-0">
+                <div class="col-md-6 ">
+                  <input id="urlFoto" placeholder="Clave" type="file" accept="image/*">
+                </div>
+                <div class="col-md-6">
+                  <button mat-raised-button type="submit" class="btn btn-danger pull-right" >Cambiar Foto</button>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card card-profile">
           <div class="card-avatar">
-            <a href="javascript:void(0)">
-              <img class="img" src="./assets/img/faces/juan.jpg" />
-            </a>
+            <img class="img" src="./assets/img/faces/juan.jpg" />
           </div>
           <div class="card-body">
             <!-- <h6 class="card-category text-gray">Ingeniero de Sistemas</h6> -->
-            <h6 class="card-title">Juan Carlos Pazmiño R.</h6>
-            <p class="card-description alnJustificado">
-              Ingeniero de sistemas investigador y analítico, la mayor parte de mi experiencia laboral ha sido
-              desempeñando
-              cargos de docencia y administración universitaria. <br>
-              Desarrollador de software con más de 8 años de experiencia en el desarrollo de aplicaciones web y
-              multimedia,
-              en constante capacitación para obtener procesos más eficientes y mejores soluciones.
-            </p>
+            <h6 class="card-title">{{usuario.nombres}} {{usuario.apellidos}}</h6>
+            <p class="card-description alnJustificado">{{usuario.acercaMi}}</p>
             <!-- <a href="javascript:void(0)" class="btn btn-danger btn-round">Seguir</a> -->
           </div>
         </div>
