@@ -29,4 +29,8 @@ export class UsuarioService{
 
         return this._http.put(this.url+'usuario/actualizar/'+usuarioId, params, {headers: headers});
     }
+
+    subirfoto(usuarioId, formData): Observable<any>{
+        return this._http.post(this.url+'usuario/upload-image/'+usuarioId, formData);
+    }
 }

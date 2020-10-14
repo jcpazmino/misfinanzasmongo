@@ -31,6 +31,7 @@
     "@angular/platform-server": "8.0.0",
     "@angular/router": "8.0.0",
     "ajv": "6.10.0",
+    "angular-file-uploader": "^7.0.2",
     "arrive": "2.4.1",
     "bcryptjs": "^2.4.3",
     "bootstrap": "4.3.1",

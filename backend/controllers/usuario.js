@@ -204,7 +204,7 @@ var controller = {
     },
     upload: (req, res) => {
         var UsuarioId = req.params.id;
-
+       
         if (!UsuarioId || UsuarioId == null) {
             return res.status(428).send({
                 status: 'error',
@@ -212,10 +212,10 @@ var controller = {
             });
         } else {
             //recoger el fichero de la petición
-            var file_name = 'Imagen no subida';
+            var file_name = 'juan.jgp';// imagen por defecto
 
-            //conseguir nombre y extensión
-            var file_path = req.files.file.path;//utiliza file0 para hacerlo genérico,  puede tener cualquier nombre
+             //conseguir nombre y extensión
+            var file_path = req.files.uploads[0].path;
             var path_split = file_path.split("\\"); //en unix \\ camia a /
 
             var file_name = path_split[2];//toma el nombre del archivo
@@ -231,7 +231,7 @@ var controller = {
                         message: mensage.gl_mensages(403)
                     });
                 });
-            } else {
+            } else { 
                 var UsuarioId = req.params.id;
 
                 const query = { _id: UsuarioId };

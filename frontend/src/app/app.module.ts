@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule} from '@angular/common/http';
+import { AngularFileUploaderModule } from "angular-file-uploader";
 
 
 import { AppRoutingModule } from './app.routing';
@@ -26,6 +27,7 @@ import { FijoComponent } from './fijo/fijo.component';
 
 @NgModule({
   imports: [
+    AngularFileUploaderModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,

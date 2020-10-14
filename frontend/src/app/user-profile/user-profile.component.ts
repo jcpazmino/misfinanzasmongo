@@ -28,10 +28,12 @@ export class UserProfileComponent implements OnInit {
   public usuario: Usuario;
   titulo: string="Actualizar clave de usuario";
   titulo1: string="Actualizar datos básicos del usuario";
+  titulo2: string="Actualizar imagen de usuario";
   claveAnterior:string;
   parametrosClave: string = "Debe digitar: entre 6 y 20 caracteres, contener al menos: un número, una letra mayúscula y una minúscula";
 
   srcResult:string;
+  files: Array<File>;
 
   constructor(
     private _UsuarioService: UsuarioService,
@@ -154,7 +156,29 @@ export class UserProfileComponent implements OnInit {
       )
     }     
   }
-  onSubmit(){
-    console.log("submit")
+  onFileSelected(event){
+    this.files = event.target.files; 
+    //console.log(this.files[0].name)
   }
+  onSubmit(){
+    let formData = new FormData();
+    formData.append("uploads[]", this.files[0], this.files[0].name);
+    
+    this._UsuarioService.subirfoto(this.UsuarioId, formData).subscribe(
+      response => {
+        swal({
+          title: this.titulo2,
+          text: response.message,
+          icon: response.status
+        });
+      },
+      error => {
+        swal({
+          title: this.titulo2,
+          text: error.error.message,
+          icon: error.error.status
+        });
+      }
+    )
+  } 
 }

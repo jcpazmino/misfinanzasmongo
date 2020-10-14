@@ -89,7 +89,7 @@
                 Clave</button>
               <div class="clearfix"></div>
             </form>
-            <form #frmUrlFoto="ngForm" method='post' encType="multipart/form-data" (ngSubmit) = "onSubmit()">
+            <form #frmUrlFoto="ngForm" method='post' encType="multipart/form-data" (ngSubmit)="onSubmit()">
               <div class="row">
                 <div class="col-md-12">
                   <h4>Cambiar Foto</h4>
@@ -97,15 +97,15 @@
               </div>
               <div class="row mb-0 pb-0">
                 <div class="col-md-6 ">
-                  <input id="urlFoto" placeholder="Clave" type="file" accept="image/*">
+                  <input name="urlFoto" placeholder="Clave" type="file" accept="image/*" [(ngModel)]="frm_urlFoto"
+                    (change)="onFileSelected($event)">
                 </div>
                 <div class="col-md-6">
-                  <button mat-raised-button type="submit" class="btn btn-danger pull-right" >Cambiar Foto</button>
+                  <button mat-raised-button type="submit" class="btn btn-danger pull-right">Cambiar Foto</button>
                 </div>
               </div>
               <div class="clearfix"></div>
             </form>
-
           </div>
         </div>
       </div>
